@@ -5,7 +5,14 @@
 	
 	<!-- class 이름은 같은 이름이 있을 수 있으므로 패키지 이름까지 같이 써우저야 함 -->
 	<!-- Exam exam = new NewlecExam(); -->
-	<bean id="exam" class="spring.di.entity.NewlecExam"></bean>
+	<bean id="exam" class="spring.di.entity.NewlecExam">
+		<property name="kor">
+			<value>10</value>
+		</property>
+		<property name="eng" value="20" />
+		<property name="math" value="30" />
+		<property name="com" value="40" />
+	</bean>
 	<!-- ExamConsole console = new GridExamConsole(); -->
 	<bean id="console" class="spring.di.ui.InlineExamConsole">
 		<!-- console.setExam(exam); -->
