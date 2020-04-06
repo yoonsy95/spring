@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<!-- class 이름은 같은 이름이 있을 수 있으므로 패키지 이름까지 같이 써우저야 함 -->
 	<!-- Exam exam = new NewlecExam(); -->
-	<bean id="exam" class="spring.di.entity.NewlecExam">
-		<!-- 생성자 di -->
-		<!-- 순서대로 값이 들어가지만 무엇에 대한 값인지 알 수 없어 버그 발생 가능함 => index 지정 -->
-		<constructor-arg name="kor" value="10" />
-		<constructor-arg name="eng" value="20" />
-		<constructor-arg index="3" value="30" />
-		<constructor-arg index="2" type="int" value="40" />
-	</bean>
+	<!-- 처리기 도움 -->
+	<bean id="exam" class="spring.di.entity.NewlecExam" 
+			p:kor="10" p:eng="30" p:math="40" p:com="20" />
+	
 	<!-- ExamConsole console = new GridExamConsole(); -->
 	<bean id="console" class="spring.di.ui.InlineExamConsole">
 		<!-- console.setExam(exam); -->
-		<!-- 
-			속성은 value와 ref가 있음 
-			property에서 설정해는 객체 이름이 값으로 들어감
-			value형이면 value에, reference형이면 ref에 값을 넣음
-		-->
 		<property name="exam" ref="exam" />
 	</bean>
 </beans>
