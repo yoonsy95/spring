@@ -1,39 +1,41 @@
 package spring.di;
 
-import spring.di.entity.Exam;
-import spring.di.entity.NewlecExam;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+//import spring.di.entity.Exam;
+//import spring.di.entity.NewlecExam;
 import spring.di.ui.ExamConsole;
-import spring.di.ui.GridExamConsole;
-import spring.di.ui.InlineExamConsole;
+//import spring.di.ui.GridExamConsole;
+//import spring.di.ui.InlineExamConsole;
 
 public class Program {
 
 	public static void main(String[] args) {
-//		형식 같아야하는데 다름(참조형식 != 객체형식)
-//		부모자식관계면 상관 없음
-//		interface(Exam) = 데이터구현객체(NewlecExam)
-		Exam exam = new NewlecExam();
 		
-//		exam 출력(ExamConsole)
-//		interface(ExamConsole)
+/*
+ * 		부품 생성 => 수정시 바뀌는 부분 => 설정 파일로 밖으로 빼내는 것이 바람직
+ * 		Exam exam = new NewlecExam();
+ * 		ExamConsole console = new GridExamConsole();
+ * 
+ * 		부품 결합 => 생성이 바뀌면 해당 부분도 수정되어야 함
+ * 		console.setExam(exam);
+ */
 		
-//		InlineExamConsole: 한 줄로 출력
-//		일반적인 방식
-//		ExamConsole console = new InlineExamConsole();
-		ExamConsole console = new GridExamConsole();
-		console.setExam(exam);
+//		위 내용을 spring 지시서로 바꿈 => setting.xml
+//		context: IoC container 역할 수행
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring/di/setting.xml");
 		
-//		생성자로 결합
-//		ExamConsole console = new InlineExamConsole(exam);  // DI
+//		객체 이름만가지고 요청할 시 object형으로 꺼내지므로 casting 해주어야 함
+//		ExamConsole console = (ExamConsole) context.getBean("console");
+
+//		ExamConsole에서 interface 형식의 참조될 수 있는 친구를 찾아줘 
+//		class 대신 구체화된 이름 넣어도 됨
+//		형변환 필요 없고 깔끔하기에 선호됨
+		ExamConsole console = context.getBean(ExamConsole.class);
 		
-//		GridExamConsole: 그리드 형태로 출력
-//		ExamConsole console = new GridExamConsole(exam);
+//		print()
 		console.print();
-		
-//		InlineExamConsole -> GridExamConsole 수정시
-//		소스 수정이 없으려면 설정파일로 빼내야 함
-//		=> spring이 해줌 // 결합여부, 방식
-//			di를 대신해주면서 소스코드를 밖으로 빼내주는 역할
 	}
 
 }
