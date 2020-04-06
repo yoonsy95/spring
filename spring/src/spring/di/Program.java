@@ -1,9 +1,13 @@
 package spring.di;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import spring.di.entity.Exam;
+import spring.di.entity.NewlecExam;
 //import spring.di.entity.Exam;
 //import spring.di.entity.NewlecExam;
 import spring.di.ui.ExamConsole;
@@ -18,10 +22,19 @@ public class Program {
 		
 		Exam exam=context.getBean(Exam.class);
 		System.out.println(exam.toString());
-		ExamConsole console = context.getBean(ExamConsole.class);
-		
-//		print()
+		ExamConsole console = (ExamConsole) context.getBean("console");
+//		ExamConsole console = context.getBean(ExamConsole.class);
 		console.print();
+		System.out.println();
+		
+//		exam list들을 exam이 set함
+		List<Exam> exams = (List<Exam>) context.getBean("exams"); // new ArrayList<>();
+//		add: not setter => setting.xml property에 사용 불가함
+//		=> ArrayList는 생성자에 collection을 대입할 수 있음
+//		exams.add(new NewlecExam(1,1,1,1));
+		
+		for(Exam e: exams)
+			System.out.println(e);
 	}
 
 }
