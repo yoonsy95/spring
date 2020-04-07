@@ -3,46 +3,38 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	
+	<!-- config 중 일부분은 annotation 했으니 찾아서하렴 -->
+	<context:annotation-config />
 	
 	<!-- Exam exam = new NewlecExam(); -->
 	<!-- 처리기 도움 -->
-	<bean id="exam" class="spring.di.entity.NewlecExam" 
-			p:kor="10" p:eng="30" p:math="40" p:com="20" />
+	<!-- 
+		같은 클래스가 하나인 경우 bean에 id 없어도 binding 가능함
+		
+		하나 이상인 경우 두 개라면 에러남
+		=> bean의 id와 autowired하는 interface의 별칭 같게 설정하면 에러가 나지 않음
+		=> @Qualifier("exam1")
+	 -->
+	<bean id="exam1" class="spring.di.entity.NewlecExam" 
+			p:kor="50" p:eng="50" p:math="50" p:com="50" />
+	<bean id="exam2" class="spring.di.entity.NewlecExam" 
+			p:kor="5" p:eng="5" p:math="5" p:com="5" />
 	
 	<!-- ExamConsole console = new GridExamConsole(); -->
 	<bean id="console" class="spring.di.ui.InlineExamConsole">
 		<!-- console.setExam(exam); -->
-		<property name="exam" ref="exam" />
+		<!-- <property name="exam" ref="exam" /> -->
 	</bean>
-	
-	<!-- 
-		collection 별도의 namespace 필요함(util) 
-		아래 constructor-args와 다른 처리기를 사용
-		직접 객체를 만들 수 있음
-		
-		list 종류가 다양하므로 추가적으로 list가 사용할 수 있는 클래스를 구체화시켜야 함
-		
-		직접 Program.java 파일에 가져다 사용가능하므로 id 작성 가능함
-	-->
-	<util:list id="exams" list-class="java.util.ArrayList">
+
+	<!-- <util:list id="exams" list-class="java.util.ArrayList">
 		<bean class="spring.di.entity.NewlecExam" 
 				p:kor="10" p:eng="20" p:math="30" p:com="40" />
 		<ref bean="exam" />
-	</util:list>
+	</util:list> -->
 	
-	<!-- Program.java의 exams.add(new NewlecExam(1,1,1,1)); 를 초기화  -->
-	<!-- <bean id="exams" class="java.util.ArrayList">
-		<constructor-arg>
-			초기화하려는 내용 작성
-			collection list 생성 => ArrayList에 넘김
-			<list>
-				<bean class="spring.di.entity.NewlecExam" 
-						p:kor="10" p:eng="20" p:math="30" p:com="40" />
-				<ref bean="exam" />
-			</list>
-			정적으로 박는게 아니라 collection 따로 생성 => 위로ㄱㄱ
-		</constructor-arg>
-	</bean> -->
 </beans>
