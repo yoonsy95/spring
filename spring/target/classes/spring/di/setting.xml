@@ -8,33 +8,19 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 	
-	<!-- config 중 일부분은 annotation 했으니 찾아서하렴 -->
-	<context:annotation-config />
-	
-	<!-- Exam exam = new NewlecExam(); -->
-	<!-- 처리기 도움 -->
 	<!-- 
-		같은 클래스가 하나인 경우 bean에 id 없어도 binding 가능함
-		
-		하나 이상인 경우 두 개라면 에러남
-		=> bean의 id와 autowired하는 interface의 별칭 같게 설정하면 에러가 나지 않음
-		=> @Qualifier("exam1")
+		context:annotation-config는 bean의 클래스에서 @Autowired를 읽어와 객체화
+		context:component-scan는 base-package의 @Component를 찾아 객체화시킴
+			context:annotation-config의 상위개념
+	-->
+	<!-- 
+		context:component-scan
+		=> 어플리케이션 컨텍스트에 등록된 빈들의 어노테이션들이 적용될 수 있도록 함
+		=> 어노테이션이 설정된 새로운 빈들을 찾는 스캔도 할 수 있음
 	 -->
-	<!-- <bean id="exam1" class="spring.di.entity.NewlecExam" 
-			p:kor="50" p:eng="50" p:math="50" p:com="50" />
-	<bean id="exam2" class="spring.di.entity.NewlecExam" 
-			p:kor="5" p:eng="5" p:math="5" p:com="5" /> -->
+	<context:component-scan base-package="spring.di.ui,spring.di.entity" />
 	
 	<!-- ExamConsole console = new GridExamConsole(); -->
-	<bean id="console" class="spring.di.ui.InlineExamConsole">
-		<!-- console.setExam(exam); -->
-		<!-- <property name="exam" ref="exam" /> -->
-	</bean>
-
-	<!-- <util:list id="exams" list-class="java.util.ArrayList">
-		<bean class="spring.di.entity.NewlecExam" 
-				p:kor="10" p:eng="20" p:math="30" p:com="40" />
-		<ref bean="exam" />
-	</util:list> -->
-	
+	<!-- <bean id="console" class="spring.di.ui.InlineExamConsole">
+	</bean>	 -->
 </beans>

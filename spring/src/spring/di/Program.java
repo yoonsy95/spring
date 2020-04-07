@@ -21,7 +21,10 @@ public class Program {
 		
 //		Exam exam=context.getBean(Exam.class);
 //		System.out.println(exam.toString());
+		
+//		이름으로 찾을 때 사용
 		ExamConsole console = (ExamConsole) context.getBean("console");
+//		해당 인터페이스에 부합되는 아이들 찾아데려와 => 형식으로 찾음
 //		ExamConsole console = context.getBean(ExamConsole.class);
 		console.print();
 		System.out.println();
