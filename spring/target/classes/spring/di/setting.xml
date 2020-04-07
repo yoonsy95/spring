@@ -20,10 +20,10 @@
 		=> bean의 id와 autowired하는 interface의 별칭 같게 설정하면 에러가 나지 않음
 		=> @Qualifier("exam1")
 	 -->
-	<bean id="exam1" class="spring.di.entity.NewlecExam" 
+	<!-- <bean id="exam1" class="spring.di.entity.NewlecExam" 
 			p:kor="50" p:eng="50" p:math="50" p:com="50" />
 	<bean id="exam2" class="spring.di.entity.NewlecExam" 
-			p:kor="5" p:eng="5" p:math="5" p:com="5" />
+			p:kor="5" p:eng="5" p:math="5" p:com="5" /> -->
 	
 	<!-- ExamConsole console = new GridExamConsole(); -->
 	<bean id="console" class="spring.di.ui.InlineExamConsole">
