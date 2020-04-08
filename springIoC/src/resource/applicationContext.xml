@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO 1. Context 관련 Namespace를 추가하시오. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- TODO 2. Context Schema 문서를 등록하시오. => namespace에서 추가 -->
+	
+	<!-- TODO 3. Annotation 기반의 빈 설정 위한 Context 태그를 추가하시오. -->
+	<context:component-scan base-package="com.board,com.user" />
+</beans>
