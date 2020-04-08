@@ -29,6 +29,14 @@
 		<artifactId>spring-jdbc</artifactId> 
 		<version>3.1.1.RELEASE</version> 
 	</dependency> 
+	<!-- https://mvnrepository.com/artifact/org.springframework/org.springframework.test -->
+	<!-- <dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>org.springframework.test</artifactId>
+	    <version>3.1.1.RELEASE</version>
+	    <scope>test</scope>
+	</dependency> -->
+	
 	<dependency>
 	    <groupId>commons-dbcp</groupId>
 	    <artifactId>commons-dbcp</artifactId>
