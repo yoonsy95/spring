@@ -23,6 +23,8 @@ public class BoardDAO {
 	private final String BOARD_LIST_TITLE = "select * from board where title like ? order by seq desc";
 	private final String BOARD_LIST_CONTENT = "select * from board where content like ? order by seq desc";
 	private final String BOARD_GET = "select * from board where seq=?";
+	private final String board_list="select * from board order by seq desc";
+	
 	public void addBoard(BoardVO vo){
 		// TODO2. 새글 등록 JDBC 로직을 구현하시오.
 		try {
@@ -46,6 +48,7 @@ public class BoardDAO {
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
 			pstmt.setInt(3, vo.getSeq());
+			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -57,7 +60,7 @@ public class BoardDAO {
 		try {
 			conn=JDBCUtil.getConnection();
 			pstmt=conn.prepareStatement(BOARD_DELETE);
-			pstmt.setInt(1, rs.getInt("seq"));
+			pstmt.setInt(1, vo.getSeq());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,6 +77,7 @@ public class BoardDAO {
 			conn=JDBCUtil.getConnection();
 			pstmt=conn.prepareStatement(BOARD_LIST_TITLE);
 			pstmt.setString(1, rs.getString("title"));
+			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				BoardVO bVo=new BoardVO();
 				bVo.setSeq(rs.getInt("seq"));
@@ -98,6 +102,31 @@ public class BoardDAO {
 			conn=JDBCUtil.getConnection();
 			pstmt=conn.prepareStatement(BOARD_GET);
 			pstmt.setInt(1, vo.getSeq());
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				BoardVO bVo=new BoardVO();
+				bVo.setSeq(rs.getInt("seq"));
+				bVo.setTitle(rs.getString("title"));
+				bVo.setContent(rs.getString("content"));
+				bVo.setWriter(rs.getString("writer"));
+				boardList.add(bVo);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+		
+		return boardList;
+	}
+	
+	public ArrayList<BoardVO> getBoard() {
+		ArrayList<BoardVO> boardList = new ArrayList<BoardVO>();
+		
+		try {
+			conn=JDBCUtil.getConnection();
+			pstmt=conn.prepareStatement(board_list);
+			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				BoardVO bVo=new BoardVO();
 				bVo.setSeq(rs.getInt("seq"));
