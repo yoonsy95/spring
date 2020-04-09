@@ -34,7 +34,7 @@
 
 
 
-
+#
 
 
 
@@ -47,7 +47,7 @@
 
 
 
-
+#
 
 
 
@@ -56,6 +56,8 @@
 `Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.user.UserService com.user.UserServiceTest.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No matching bean of type [com.user.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}`
 
 
+
+#
 
 
 
@@ -69,9 +71,14 @@
 
 
 
+#
+
+
+
 #### `Caused by: java.sql.SQLIntegrityConstraintViolationException: ORA-01400: NULL을 ("SCOTT"."USERINFO"."UNO")` 안에 삽입할 수 없습니다
 
 - `userinfo` 테이블의 순서(?)를 기본키로 지정해 놓음
 - `insert`에 등록해 놓지 않아 발생하는 에러
 - DB 테이블 자동으로 1씩 증가하도록 수정하여야
 - ... 어떻게 하더랍..?ㅎㅎ
+
