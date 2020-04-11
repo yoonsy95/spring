@@ -33,8 +33,8 @@ public class UserDAOImpl implements UserDAO {
 	public int addUser(final User user) {	
 		int rows = 0;
 		final StringBuffer sql = new StringBuffer();
-		sql.append("insert into userinfo (userid, username, userpwd, email, phone) ");
-		sql.append(" values (?,?,?,?,?)");	
+		sql.append("insert into userinfo (uno, userid, username, userpwd, email, phone) ");
+		sql.append(" values((select nvl(max(uno), 0)+1 from userinfo),?,?,?,?,?)");	
 		rows = template.update(new PreparedStatementCreator() {			
 			@Override
 			public PreparedStatement createPreparedStatement(Connection con)

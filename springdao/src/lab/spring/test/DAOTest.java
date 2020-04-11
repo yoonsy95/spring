@@ -22,32 +22,36 @@ public class DAOTest {
 //		System.out.println();
 		
 //		Crud
-		User user = new User();
-		user.setUserid("admin");
-		user.setUsername("관리자");
-		user.setUserpwd("a1234");
-		user.setEmail("admin@korea.or.kr");
-		user.setPhone("02-129");
-		System.out.println("insert rows = >" + service.addUser(user));
-		System.out.println();
-
-		/*
-		List<User> lists = service.findUserList();
-		Iterator<User> iter = lists.iterator();
-		while (iter.hasNext()) {
-			User u = iter.next();
-			System.out.println(u);
-		}
-		*/
-		
-//		System.out.println(service.findUser("s3"));
 //		User user = new User();
-//		user.setUserid("s3");		
-//		user.setEmail("s3@gmail.or.kr");
+//		user.setUserid("admin");
+//		user.setUsername("관리자");
+//		user.setUserpwd("a1234");
+//		user.setEmail("admin@korea.or.kr");
+//		user.setPhone("02-129");
+//		System.out.println("insert rows = >" + service.addUser(user));
+//		System.out.println();
+
+//		cRud // 한 줄에 하나씩
+//		List<User> lists = service.findUserList();
+//		Iterator<User> iter = lists.iterator();
+//		while (iter.hasNext()) {
+//			User u = iter.next();
+//			System.out.println(u);
+//		}
+		
+//		cRud // search
+		System.out.println(service.findUser("admin"));
+		
+//		crUd
+//		User user = new User();
+//		user.setUserid("admin");		
+//		user.setEmail("admin@gmail.or.kr");
 //		user.setPhone("02-129-1234");
-//		System.out.println("update :s3 =>"+service.updateUser(user));
-//		System.out.println(service.findUser("s3"));
-//		System.out.println("delete :s3 =>"+service.removeUser("s3"));
+//		System.out.println("update :admin =>"+service.updateUser(user));
+//		System.out.println(service.findUser("admin"));
+
+//		cruD
+		System.out.println("delete :hong123 =>"+service.removeUser("hong123"));
 		
 		ArrayList<User> userlist = (ArrayList<User>) service.findUserList();
 		System.out.println(userlist);
