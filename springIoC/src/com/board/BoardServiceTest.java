@@ -2,6 +2,9 @@ package com.board;
 
 import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,43 +20,43 @@ import com.user.UserService;
 public class BoardServiceTest {
 	
 	public static void main(String args[]) {
-//		@Autowired => 해당한는 이름 하나밖에 없는데 못 찾아서 직접 입력 
-//		private BoardService boardService;
-		BoardService boardService;
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("./resource/application*.xml");
-		boardService = (BoardService)ctx.getBean("boardService");
-		
-//		@Test
-//		public void testAddBoard() {
-			BoardVO searchVO = new BoardVO();
-			searchVO.setSearchCondition("TITLE");
-			searchVO.setSearchKeyword("");
-			
-			
-//			ArrayList<BoardVO> boardList = boardService.getBoardList(searchVO);
-//			int beforeCnt = boardList.size();
-			
-			BoardVO vo = new BoardVO();
-//			Crud
-//			vo.setTitle("JDBC");
-//			vo.setWriter("채규태");
-//			vo.setContent("content");
-//			boardService.addBoard(vo);
-			
-//			crUd
-//			vo.setTitle("JDBC 제목");
-//			vo.setContent("JDBC 내용");
-//			vo.setSeq(2);
-//			boardService.updateBoard(vo);
-			
-//			cruD
-			vo.setSeq(2);
-			boardService.deleteBoard(vo);
-			
-			ArrayList<BoardVO> boardlist = boardService.getBoard();
-			System.out.println(boardlist);
-			
 
-//		}
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("./resource/application*.xml");
+		BoardService boardService = (BoardService)ctx.getBean("boardService");
+		
+		
+//		BoardVO searchVO = new BoardVO();
+//		searchVO.setSearchCondition("TITLE");
+//		searchVO.setSearchKeyword("");
+		
+		
+//		ArrayList<BoardVO> boardList = boardService.getBoardList(searchVO);
+//		int beforeCnt = boardList.size();
+		
+		BoardVO vo = new BoardVO();
+		
+//		Crud
+//		vo.setTitle("JDBC");
+//		vo.setWriter("채규태");
+//		vo.setContent("content");
+//		boardService.addBoard(vo);
+		
+//		crUd
+//		vo.setTitle("JDBC 제목");
+//		vo.setContent("JDBC 내용");
+//		vo.setSeq(2);
+//		boardService.updateBoard(vo);
+		
+//		cruD
+		vo.setSeq(2);
+		boardService.deleteBoard(vo);
+		
+//		cRud
+		List<BoardVO> boards = boardService.getBoard();
+		Iterator<BoardVO> iter = boards.iterator();
+		while(iter.hasNext()) {
+			BoardVO b = iter.next();
+			System.out.println(b);
+		}
 	}
 }

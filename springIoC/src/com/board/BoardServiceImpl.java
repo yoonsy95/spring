@@ -1,6 +1,7 @@
 package com.board;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,28 +18,28 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAO boardDAO;
 	
-	public void addBoard(BoardVO vo) {
-		boardDAO.addBoard(vo);
+	public int addBoard(BoardVO vo) {
+		return boardDAO.addBoard(vo);
 	}
 	
-	public void updateBoard(BoardVO vo) {
-		boardDAO.updateBoard(vo);
+	public int updateBoard(BoardVO vo) {
+		return boardDAO.updateBoard(vo);
 	}
 	
-	public void deleteBoard(BoardVO vo) {
-		boardDAO.deleteBoard(vo);
+	public int deleteBoard(BoardVO vo) {
+		return boardDAO.deleteBoard(vo);
 	}
 	
-	public ArrayList<BoardVO> getBoard(BoardVO vo) {
+	public BoardVO getBoard(BoardVO vo) {
 		return boardDAO.getBoard(vo);
 	}
 	
-	public ArrayList<BoardVO> getBoardList(BoardVO vo) {
+	public BoardVO getBoardList(BoardVO vo) {
 		vo.setSearchKeyword("%"+vo.getSearchKeyword()+"%");
 		return boardDAO.getBoardList(vo);
 	}
 	
-	public ArrayList<BoardVO> getBoard() {
+	public List<BoardVO> getBoard() {
 		return boardDAO.getBoard();
 	}
 }
