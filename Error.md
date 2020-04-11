@@ -32,18 +32,47 @@
 
 
 
+#
+
+
+
+#### SpringDAO로 데이터베이스 연결하고자할 때
+
+```xml
+<!-- Spring Data Source Bean -->
+<bean id="dataSource"
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+      p:driverClassName="oracle.jdbc.OracleDriver" 
+      p:url="jdbc:oracle:thin:@127.0.0.1:1521:orcl"
+      p:username="scott" p:password="oracle" />
+
+<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <constructor-arg>
+        <ref bean="dataSource" />
+    </constructor-arg>
+</bean>
+```
+
+- `namespace`에서 `jee`와 `p`를 추가하자
+
 
 
 #
 
 
 
-
-
 #### 심각: `Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@1e6d1014] to prepare test instance [com.user.UserServiceTest@76707e36]`
 ##### org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.user.UserServiceTest': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.user.UserService com.user.UserServiceTest.userService; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No matching bean of type [com.user.UserService] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
 
-- `autowired` 설정 잘못하여 `bean을` 못찾음
+1. `autowired` 설정 잘못하여 `bean을` 못찾음
+
+   `@Service("ServiceName")` - `@Autowired`
+
+   `@Repository` - `@Autowired`
+
+2. `implements ClassName`  추가
+
+
 
 
 
@@ -78,7 +107,27 @@
 #### `Caused by: java.sql.SQLIntegrityConstraintViolationException: ORA-01400: NULL을 ("SCOTT"."USERINFO"."UNO")` 안에 삽입할 수 없습니다
 
 - `userinfo` 테이블의 순서(?)를 기본키로 지정해 놓음
+
 - `insert`에 등록해 놓지 않아 발생하는 에러
+
 - DB 테이블 자동으로 1씩 증가하도록 수정하여야
-- ... 어떻게 하더랍..?ㅎㅎ
+
+  - oracle sql에는 `auto_increment` 속성이 없으므로 `insert`시 직접 입력
+
+    ```sql
+    insert into userinfo (uno, userid, username, userpwd, email, phone)
+    values((select nvl(max(uno), 0)+1 from userinfo),?,?,?,?,?)
+    ```
+
+    
+
+#### `List`와 `ArrayList`는 무엇이 다른가??
+
+```java
+List<BoardVO> boardList = null;
+boardList = template.query(board_list, new Object[0], new BoardRowMapper());
+```
+
+- 위 코드에서 `BoardVO`를 `ArrayList`로하면 에러남
+- 왜?? 무엇이 다르기에?
 
