@@ -119,7 +119,11 @@
     values((select nvl(max(uno), 0)+1 from userinfo),?,?,?,?,?)
     ```
 
-    
+  
+  
+  #
+  
+  
 
 #### `List`와 `ArrayList`는 무엇이 다른가??
 
@@ -133,34 +137,67 @@ boardList = template.query(board_list, new Object[0], new BoardRowMapper());
 
 
 
-Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource study/java/mybatis/mappers/DepartmentMapper.xml
+#
+
+
+
+#### `Error parsing SQL Mapper Configuration. Cause: java.io.IOException: Could not find resource study/java/mybatis/mappers/DepartmentMapper.xml`
 
 - `<mappers>`경로수정
 
 
 
-에러 : java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for ~
+#
 
 
 
-**[에러가 발생할수 있는 상황]**
+#### `에러 : java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for ~`
 
-**
-**
 
-\1. **mapper id가 다를경우**
+
+1. **mapper id가 다를경우**
 
   \- mapper파일(MyBatis의 쿼리문을 등록한 XML파일)에 <select id=''.. 에 id와 
 
    mapper파일에 직접 접근하는 java파일(DAO나 service)에 적어놓은 id값이 다른 경우 
 
-\2. Parameter와 bean의 필드명이 틀린 경우
+2. Parameter와 bean의 필드명이 틀린 경우
 
-\3. mapper파일(MyBatis의 쿼리문을 등록한 XML파일)에 정의된 네임스페이스(namespace)와 
+3. mapper파일(MyBatis의 쿼리문을 등록한 XML파일)에 정의된 네임스페이스(namespace)와 mapper파일에 직접 접근하는 java파일(DAO나 service)에서 호출하는 **네임스페이스(namespace)가 다를 경우**
 
-  mapper파일에 직접 접근하는 java파일(DAO나 service)에서 호출하는 **네임스페이스(namespace)가 다를 경우**
+4. MyBatis config파일에 **mapper가 정의가 되어 있지 않거나 Spelling이 틀린 경우**
 
-\4. MyBatis config파일에 **mapper가 정의가 되어 있지 않거나 Spelling이 틀린 경우**
+5. mapper에 정의된 **namespace 명칭이 같은 Application 내에 중복 될 경우**
 
-\5. mapper에 정의된 **namespace 명칭이 같은 Application 내에 중복 될 경우**
 
+
+#
+
+
+
+#### `Exception sending context initialized event to listener instance of class org.springframework.web.context.ContextLoaderListener`
+
+- `dependency`에 `'spring-jdbc' library` 추가
+
+
+
+#
+
+#### `Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 46056`
+
+#### `at lab.spring.test.DAOTest.main(DAOTest.java:17)`
+
+- 원인을 모르겠음
+
+  ```xml
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSource" />
+      <property name="mapperLocations" value="classpath*:resources/UserMapper.xml" />
+  </bean>
+  
+  <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+      <constructor-arg ref="sqlSessionFactory" />
+  </bean>
+  ```
+
+  에서 오류가 나는 것은 확실한데 에러 원인을 못찾겠음!!
