@@ -34,13 +34,13 @@
 
     <!-- 데이터 저장을 위한 기능 정의 -->
     <insert id="insertItem"
-            parameterType="study.java.model.Dept"
-            useGeneratedKeys="true"
-            keyProperty="deptno">
+            parameterType="study.java.model.Dept">
+            <!-- useGeneratedKeys="true"> --> <!-- ++pk -->
+            <!-- keyProperty="deptno"> -->
         INSERT INTO dept (
-            dname, loc
+            deptno, dname, loc
         ) VALUES (
-            #{dname}, #{loc}
+            #{deptno}, #{dname}, #{loc}
         )
     </insert>
 
