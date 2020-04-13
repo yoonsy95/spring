@@ -133,7 +133,36 @@ boardList = template.query(board_list, new Object[0], new BoardRowMapper());
 ```
 
 - 위 코드에서 `BoardVO`를 `ArrayList`로하면 에러남
+
 - 왜?? 무엇이 다르기에?
+
+- `List`
+
+  - `interface` 개념
+
+  - 구현체가 아니기에 구현하는데에 있어 자유도 확보 가능함
+
+  - `index` 사용하여 목록에 접근함 // `get()`,`set()` 사용 가능
+
+    ```java
+    List <> list = new ArrayList<>();
+    ```
+
+    
+
+- `ArrayList`
+
+  - `List`에 상속된 `class` // 다형성 특징으로 상속 받아 사용
+
+  - 데이터 추가(`add()`), 삭제(`remover()`) 수행시 메모리 재할당하기에 `Array`보다 느림
+
+  - 객체가 포함된 동적 배열 생성에 사용
+
+    ```java
+    arrayList<> list = new ArrayList<>();
+    ```
+
+    
 
 
 
