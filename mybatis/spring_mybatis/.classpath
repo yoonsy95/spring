@@ -17,6 +17,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/app/student/product/11.2.0/dbhome_1/jdbc/lib/ojdbc6.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

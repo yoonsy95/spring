@@ -1,17 +1,33 @@
 package lab.spring.user;
 
 public class User {
-	
-	private int uno;	
 	private String userid;
 	private String username;
+	private int uno;
+	private int point;
+	private String address;
+	private String userpwd;
 	private String email;
 	private String phone;
-	private String userpwd;	
-    private String address;
-    
-    
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	 
+
 	public int getUno() {
 		return uno;
 	}
@@ -36,22 +52,6 @@ public class User {
 		this.userpwd = userpwd;
 	}
 
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -68,13 +68,21 @@ public class User {
 		this.phone = phone;
 	}
 
-	@Override
-	public String toString() {
-		return "User [uno=" + uno + ", userid=" + userid + ", username="
-				+ username + ", email=" + email + ", phone=" + phone
-				+ ", userpwd=" + userpwd + ", address=" + address + "]";
+	public int getPoint() {
+		return point;
 	}
 
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userid=" + userid + ", username=" + username + ", uno="
+				+ uno + ", point=" + point + ", address=" + address
+				+ ", userpwd=" + userpwd + ", email=" + email + ", phone="
+				+ phone + "]";
+	}
 	
 	
 

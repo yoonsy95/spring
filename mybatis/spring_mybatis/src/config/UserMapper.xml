@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="users">
+  <select id="getUser" parameterType="string"
+                       resultType="lab.spring.user.User">
+    select * from userinfo where userid = #{userid}
+  </select>
+  
+  <select id="getUserList" 
+                       resultType="lab.spring.user.User">
+    select * from userinfo 
+  </select>
+  
+  <insert id="addUser" parameterType="lab.spring.user.User">
+   insert into userinfo (userid, username, userpwd, email)
+   values (#{userid},#{username}, #{userpwd}, #{email} )   
+  </insert>
+  
+ <select id="login" parameterType="hashmap"
+                    resultType="lab.spring.user.User">
+    select * from userinfo where userid = #{uid} 
+    and userpwd = #{upwd}
+  </select>
+  
+  <update id="modifyUser"  
+                      parameterType="lab.spring.user.User">
+    update userinfo set username=#{username}, 
+                        userpwd=#{userpwd},
+                        email = #{email}
+                        where userid = #{userid}                      
+  </update>
+  
+  <delete id="dropUser" parameterType="string"  >
+   delete from userinfo where userid = #{userid}
+   </delete>
+  
+</mapper>
+
+
+
