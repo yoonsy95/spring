@@ -14,8 +14,7 @@ public class DAOTest {
 
 	public static void main(String[] args) {
 
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"./lab/spring/user/user_dao.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("resources/user_dao.xml");
 		UserService service = (UserService) context.getBean("userService");
 		
 //		service.login("admin", "a1234");
@@ -32,12 +31,13 @@ public class DAOTest {
 //		System.out.println();
 
 //		cRud // 한 줄에 하나씩
-		List<User> lists = service.findUserList();
-		Iterator<User> iter = lists.iterator();
-		while (iter.hasNext()) {
-			User u = iter.next();
-			System.out.println(u);
-		}
+//		String lists = service.findUserList();
+//		Iterator<User> iter = lists.iterator();
+//		while (iter.hasNext()) {
+//			User u = iter.next();
+//			System.out.println(u);
+//		}
+//		System.out.println(lists);
 		
 //		cRud // search
 //		System.out.println(service.findUser("admin"));
@@ -53,8 +53,11 @@ public class DAOTest {
 //		cruD
 //		System.out.println("delete :hong123 =>"+service.removeUser("hong123"));
 		
-//		ArrayList<User> userlist = (ArrayList<User>) service.findUserList();
-//		System.out.println(userlist);
+		ArrayList<User> userlist = (ArrayList<User>) service.findUserList();
+		System.out.println(userlist);
+		
+		
+		
 	}
 
 }
