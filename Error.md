@@ -310,5 +310,31 @@ boardList = template.query(board_list, new Object[0], new BoardRowMapper());
 
 
 
+#### ` bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: ORA-00984: 열을 사용할 수 없습니다`
+
+- sql 파라메터 받는 부분 `#{}`-> **`${}`**
+
+
+
+#
+
+
+
+#### `Statement`와 `PreparedStatement`
+
+- `statement`
+  - 완전한 sql 문장 실행시 전송
+  - hard parsing
+  - where 절이 계속 변하는 경우 낭비가 심함
+- `preparedStatement`
+  - `statement`에서의 낭비가 심하여 바인드 변수 사용
+  - sql 전송하여 db파싱하여 실행됨, 처음만 hard parsing 이후는 soft parsing
+  - `java` => ?
+  - `mybatis` => #{  }
+
+
+
+#
+
 
 
