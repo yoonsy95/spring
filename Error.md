@@ -230,3 +230,85 @@ boardList = template.query(board_list, new Object[0], new BoardRowMapper());
   ```
 
   에서 오류가 나는 것은 확실한데 에러 원인을 못찾겠음!!
+
+
+
+# 
+
+
+
+#### 하위에러코드
+
+#### `at org.springframework.asm.ClassReader.<init>(Unknown Source)`
+
+#### `at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:48)`
+
+- JDK 1.8을 사용하려는데 Spring Framework 3 버전을 사용하기 때문
+
+-  JDK 1.8을 사용하려면 Spring Framework 4.0 대를 사용해야 하고, 
+  Spring Framework 3 버전을 사용하고 싶다면 JDK 1.7을 사용해야 함
+  
+- `spring4` 설치 후 `spring-context`추가
+
+  ```xml
+  <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+  <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>4.3.26.RELEASE</version>
+  </dependency>
+  ```
+
+  
+
+#
+
+
+
+#### `Exception in thread "main" java.lang.NoClassDefFoundError: org/springframework/core/ResolvableTypeProvider`
+
+-  `spring-context`를 `spring-jdbc` 아래에 추가하면서 에러남
+- `spring-jdbc`위에 생성해줌
+
+
+
+# 
+
+#### Exception in thread "main" org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+#### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Could not get JDBC Connection; nested exception is java.sql.SQLException: Listener refused the connection with the following error: ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+
+- `sql`구문 에러
+
+
+
+#
+
+
+
+#### `Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Could not get JDBC Connection; nested exception is java.sql.SQLException: Listener refused the connection with the following error:ORA-12505, TNS:listener does not currently know of SID given in connect descriptor`
+
+- 데이터베이스 정보 입력 오타있었음
+
+  ```xml
+  <bean id="dataSource"
+  		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+  		p:driverClassName="oracle.jdbc.OracleDriver"
+  		p:url="jdbc:oracle:thin:@127.0.0.1:1521:orlc"
+  		p:username="scott" p:password="oracle" />
+  
+  <!-- orcl오타 수정 -->
+  <bean id="dataSource"
+  		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+  		p:driverClassName="oracle.jdbc.OracleDriver"
+  		p:url="jdbc:oracle:thin:@127.0.0.1:1521:orcl"
+  		p:username="scott" p:password="oracle" />
+  ```
+
+
+
+#
+
+
+
+
+
