@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="boards">
+	<select id="getBoardList" parameterType="lab.spring.board.Board"
+						  resultType="lab.spring.board.Board">
+		select * from board order by bbsId desc
+	</select>
+	
+	<select id="getBoard" parameterType="string"
+						  resultType="lab.spring.board.Board">
+		select * from board where writer like #{writer}
+	</select>
+	
+	<insert id="addBoard" parameterType="lab.spring.board.Board" useGeneratedKeys="true">
+	 <selectKey keyProperty="bbsId" resultType="int" order="BEFORE">
+	    SELECT bbs_seq.nextVal from dual
+	  </selectKey>
+		insert into board(bbsId, title, writer, content)
+		values(#{bbsId}, #{title}, #{writer}, #{content})
+	</insert>
+	
+	<update id="updateBoard" parameterType="lab.spring.board.Board">
+		update board set title=#{title}, content=#{content} where bbsId=#{bbsId}
+	</update>
+	
+	<delete id="dropBoard" parameterType="int">
+		delete from board where bbsId=#{bbsId}
+	</delete>
+</mapper>
