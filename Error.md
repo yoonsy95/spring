@@ -334,7 +334,48 @@ boardList = template.query(board_list, new Object[0], new BoardRowMapper());
 
 
 
+---
+
+### `helloMVC`
+
+
+
+#### `The fully qualified name of the bean's class, except if it serves only as a parent definition for child bean definitions.`
+
+#### `Data Type : string`
+
+- `ojdbc6.jar` 추가
+
+  ```xml
+  <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>ojdbc6</artifactId>
+      <version>11.2.0.3</version>
+      <scope>compile</scope>
+  </dependency>
+  ```
+
+
+
 #
+
+
+
+#### `The superclass "javax.servlet.http.HttpServlet" was not found on the Java Build Path`
+
+1. `server` `Apache Tomcat v9.0` 추가
+
+2. 우클릭 -> `Properties` -> `Project Faccets` -> `Java` -> check `Apache Tomcat v9.0` -> `apply`
+
+
+
+#
+
+
+
+#### `Server Tomcat v9.0 Server at locathost failed to start`
+
+- `Server` -> `open` -> check `Publish module ontexts to separate XML files`
 
 
 
